@@ -1,28 +1,29 @@
 import "./App.css";
 import { useState } from "react";
-// import { DayAndNightToggle } from 'react-day-and-night-toggle'
-
-import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
-
-import DayNightToggle from './DayNightToggle'
+import {
+  Switch,
+  FormControl,
+  FormLabel,
+  Button,
+  Spacer,
+  Stack,
+  Box,
+  Flex,
+  useColorMode,
+} from "@chakra-ui/react";
+import { DayAndNightToggle } from "./component/DayAndNightToggle/DayAndNightToggle";
+import { FaDownload } from "react-icons/fa";
+// import { MonacoEditor } from "./component/MonacoEditor/MonacoEditor.jsx";
 
 function App() {
-  const [isDarkMode, setDarkMode] = useState(false);
   const [isRough, setIsRough] = useState(false);
   const [isPan, setIsPan] = useState(false);
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        backgroundColor: "green",
-        // display: "flex",
-        // flexDirection: "column",
-        // justifyContent: "center",
-      }}
-    >
+    <div style={{ height: "100vh" }}>
       <div
         style={{
           display: "flex",
@@ -35,38 +36,65 @@ function App() {
         }}
       >
         <h1>PseudoCode2Flow</h1>
-
-        {/* <DarkModeSwitch
-          checked={isDarkMode}
-          onChange={() => setDarkMode(!isDarkMode)}
-          size={"40"}
-        /> */}
-        <DayNightToggle/>
-        {/* <DayAndNightToggle
-      // onChange={ () => setIsDarkMode(!isDarkMode) }
-      // checked={ isDarkMode }
-    /> */}
+        <DayAndNightToggle
+          onChange={() => {
+            toggleColorMode();
+          }}
+          checked={colorMode === "dark"}
+        />
       </div>
-      <div
-        style={{
-          height: "92%",
-        }}
-      >
+      <div style={{ height: "92%" }}>
         <Allotment>
-          <div style={{ backgroundColor: "red", height: "100%" }}>
-            <h2 style={{paddingLeft:"10px"}}>Mermaid Code</h2>
-            <div style={{ backgroundColor: "#522", height: "48%" }}></div>
-            <h2 style={{paddingLeft:"10px"}}>Pseudo Code</h2>
-            <div style={{ backgroundColor: "#544", height: "48%" }}></div>
-          </div>
-          <div style={{ backgroundColor: "blue", height: "100%" }}>
-            <h2 style={{paddingLeft:"10px"}}>Flowchart</h2>
-            <div style={{ backgroundColor: "#566", height: "5%" }}>
-              {/* Rough
-            <SwitchToggle switchOn={isRough} onPress={() => setIsRough(!isRough)} />
-              Pan
-            <SwitchToggle switchOn={isPan} onPress={() => setIsPan(!isRough)} /> */}
+          <div style={{ height: "100%" }}>
+            <h2 className="subTitle">Mermaid Code</h2>
+            <div style={{ height: "48%" }}>
+              {/* <MonacoEditor /> */}
             </div>
+            <h2 className="subTitle">Pseudo Code</h2>
+            <div style={{ height: "48%" }}>monaca</div>
+          </div>
+          <div style={{ height: "100%" }}>
+            <h2 className="subTitle">Flowchart</h2>
+            <div
+              style={{
+                backgroundColor: "#913",
+                height: "5%",
+                display: "flex",
+              }}
+            >
+              <Stack direction="row" spacing={4}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    paddingLeft: "10px",
+                  }}
+                >
+                  <Button
+                    leftIcon={<FaDownload />}
+                    colorScheme="blue"
+                    variant="solid"
+                  >
+                    Download
+                  </Button>
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <FormLabel htmlFor="rough" mb="0" color="white">
+                    Rough
+                  </FormLabel>
+                  <Switch id="rough" colorScheme="teal" />
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <FormLabel htmlFor="panandzoom" mb="0" color="white">
+                    Pan&Zoom
+                  </FormLabel>
+                  <Switch id="panandzoom" colorScheme="teal" />
+                </div>
+
+                <Spacer />
+              </Stack>
+            </div>
+
             <div style={{ backgroundColor: "#577", height: "92%" }}></div>
           </div>
         </Allotment>

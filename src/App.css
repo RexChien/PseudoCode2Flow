@@ -1,11 +1,23 @@
-html, body {
-  /* height: 100vh; */
-  /* margin: 0; */
-  /* padding: 20; */
-  /* overflow: hidden; */
-  /* background-color :white; */
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #4caf50;
 }
-h2 {
+.dark-theme {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --primary-color: #bb86fc;
+}
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  transition: background-color 2s, color 2s;
+}
+.subTitle{
   margin: 0;
   height: 3%;
+  padding-left: 10px;
+  /* color: blueviolet; */
 }
